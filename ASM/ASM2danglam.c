@@ -1,6 +1,34 @@
 #include <stdio.h>
 #include <math.h>
 #include <stdlib.h>
+int UCLN(int a, int b) {
+    while (b != 0) {
+        int temp = b;
+        b = a % b;
+        a = temp;
+    }
+    return a;
+}
+int BCNN(int a, int b) {
+    return (a * b) / UCLN(a, b);
+}
+float tinhTienDien(float soDien) {
+    float tienDien = 0;
+    if(soDien <= 50){
+        tienDien = soDien * 1.678;
+    }else if(soDien <= 100){
+        tienDien = 50 * 1.678 + (soDien - 50) * 1.734;
+    }else if(soDien <= 200){
+        tienDien = 50 * 1.678 + 50 * 1.734 + (soDien - 100) * 2.014;
+    }else if(soDien <= 300){
+        tienDien = 50 * 1.678 + 50 * 1.734 + 100 * 2.014 + (soDien - 200) * 2.536;
+    }else if(soDien <= 400){
+        tienDien = 50 * 1.678 + 50 * 1.734 + 100 * 2.014 + 100 * 2.536 + (soDien - 300) * 2.834;
+    }else{
+        tienDien = 50 * 1.678 + 50 * 1.734 + 100 * 2.014 + 100 * 2.536 + 100 * 2.834 + (soDien - 400) * 2.927;
+    }
+    return tienDien;
+}
 
 int main() {
     int choice;
@@ -38,11 +66,38 @@ int main() {
             printf("BCNN = %d\n", BCNN(a, b));
             break;
         }
-        case 3:printf("ban da chon 3\n");
-            break;
+        case 3:{
+            int start, end;
+            float total = 0;
+            printf("Nhap gio bat dau (12-23): ");
+            scanf("%d", &start);
+            printf("Nhap gio ket thuc (12-23): ");
+            scanf("%d", &end);
 
-        case 4:printf("ban da chon 4\n");
+            if (start < 12 || start > 23 || end < 12 || end > 23 || end <= start) {
+            printf("Gio khong hop le!\n");
             break;
+            }
+            int hours = end - start;
+            if (hours <= 3) {
+            total = hours * 50000; 
+            } else {
+             total = 150000 + (hours - 3) * (50000 * 0.7);
+            }
+            if (start >= 14 && start <= 17) {
+            total *= 0.9;
+            }
+             printf("Tien can thanh toan: %.0f VND\n", total);
+             break;
+            }
+
+        case 4:{
+            float soDien;
+            printf("Nhap so dien tieu thu: ");
+            scanf("%f", &soDien);
+            printf("So tien dien: %.2f VND\n", tinhTienDien(soDien));
+            break;
+        }
 
         case 5:printf("ban da chon 5\n");
             break;
