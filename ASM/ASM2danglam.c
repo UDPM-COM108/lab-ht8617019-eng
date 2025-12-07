@@ -99,12 +99,42 @@ int main() {
             break;
         }
 
-        case 5:printf("ban da chon 5\n");
-            break;
+        case 5:{
+            int money;
+            int menhGia[] = {500, 200, 100, 50, 20, 10, 5, 2, 1};
+            int soTo;
+            printf("Nhap so tien can doi: ");
+            scanf("%d", &money);
+            printf("Cac menh gia duoc doi ra:\n");
+            for (int i = 0; i < 9; i++) {
+            soTo = money / menhGia[i];
+            if (soTo > 0) {
+            printf("%d to %d\n", soTo, menhGia[i]);
+            money %= menhGia[i]; 
+                }
+             }
+             break;
+        }
+        case 6: {
+            long tienVay;
+            float laiSuat = 0.05; 
+            int thang = 12;
+            printf("Nhap so tien muon vay: ");
+            scanf("%ld", &tienVay);
+            long gocMoiThang = tienVay / thang;
+            long gocConLai = tienVay;
+            printf("\n%-10s %-15s %-15s %-15s %-15s\n",
+           "Ky han", "Lai phai tra", "Goc phai tra", "Tong phai tra", "So tien con lai");
+            for (int i = 1; i <= thang; i++) {
+            long laiPhaiTra = gocConLai * laiSuat;
+            long tongPhaiTra = laiPhaiTra + gocMoiThang;
+            gocConLai -= gocMoiThang;
+            printf("%-10d %-15ld %-15ld %-15ld %-15ld\n",
+               i, laiPhaiTra, gocMoiThang, tongPhaiTra, gocConLai);
+                }
 
-        case 6:printf("ban da chon 6\n");
             break;
-
+        }
         case 7:printf("ban da chon 7\n");
             break;
 
