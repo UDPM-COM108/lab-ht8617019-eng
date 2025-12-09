@@ -44,8 +44,6 @@ int main() {
         printf("6. Tinh lai suat vay ngan hang\n");
         printf("7. Vay mua xe\n");
         printf("8. Sap xep sinh vien\n");
-        printf("9. Game FPOLY-LOTT\n");
-        printf("10. Tinh toan phan so\n");
         printf("0. Exit\n");
         printf("\nMoi ban nhap lua chon: ");
 
@@ -135,18 +133,53 @@ int main() {
 
             break;
         }
-        case 7:printf("ban da chon 7\n");
-            break;
+        case 7: {
+            float percent;
+            const float carPrice = 500000000;       
+            const float annualRate = 15;           
+            const int years = 24;
+            const int months = years * 12;
+            printf("Nhap phan tram vay toi da (vd: 80 la vay 80%%): ");
+            scanf("%f", &percent);
+            float loanAmount = carPrice * percent / 100.0f;
+            float downPayment = carPrice - loanAmount;
+            float monthlyRate = annualRate / 100.0f / 12.0f;
+            float monthlyPayment =
+            (loanAmount * monthlyRate) /
+            (1 - powf(1 + monthlyRate, -months));
+             printf("\n===== KET QUA =====\n");
+             printf("Gia tri xe             : %.0f VND\n", carPrice);
+             printf("Phan tram vay          : %.2f%%\n", percent);
+             printf("Tien tra truoc         : %.0f VND\n", downPayment);
+             printf("So tien vay            : %.0f VND\n", loanAmount);
+             printf("Tien tra hang thang    : %.0f VND\n", monthlyPayment);
+             break;
+        }
+        case 8: {
+            int n;
+            printf("Nhap so sinh vien: ");
+            scanf("%d", &n);
+            char names[n][50];
+            for (int i = 0; i < n; i++) {
+                printf("Nhap ten sv %d: ", i + 1);
+                scanf("%s", names[i]);
+            }
+            for (int i = 0; i < n - 1; i++) {
+                for (int j = i + 1; j < n; j++) {
+                    if (strcmp(names[i], names[j]) > 0) {
+                        char temp[50];
+                        strcpy(temp, names[i]);
+                        strcpy(names[i], names[j]);
+                        strcpy(names[j], temp);
+                    }
+                }
+            }
 
-        case 8:printf("ban da chon 8\n");
+            printf("Danh sach sau khi sap xep:\n");
+            for (int i = 0; i < n; i++)
+                printf("%s\n", names[i]);
             break;
-
-        case 9:printf("ban da chon 9\n");
-            break;
-
-        case 10:printf("ban da chon 10\n");
-            break;
-
+        }
         case 0:printf("Thoat chuong trinh...\n");
             break;
 
